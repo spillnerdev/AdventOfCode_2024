@@ -1,0 +1,9 @@
+[versions]
+ktor-client = "3.0.1"
+
+[libraries]
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client"}
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client"}
+
+[bundles]
+ktor = ["ktor-client-core", "ktor-client-cio" ]
