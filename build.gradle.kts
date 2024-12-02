@@ -15,6 +15,7 @@ allprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     dependencies {
         implementation(rootProject.libs.bundles.ktor)
+        testImplementation(kotlin("test"))
     }
 }
 
