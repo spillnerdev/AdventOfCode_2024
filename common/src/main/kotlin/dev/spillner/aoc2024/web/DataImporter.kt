@@ -18,12 +18,13 @@ class DataImporter {
 
     private val fileTemplate = "input-day-%d.txt"
     private val inputCache = ".\\input"
+    private val sessionToken = "<YourSessionTokenHere>"
 
 
     fun getInput(day: Day): String {
         val fileName = fileTemplate.format(day.value)
-        (lookUpCache(fileName) ?: createFile(day, fileName)).let {
-            return it.readText(StandardCharsets.UTF_8)
+        return with(lookUpCache(fileName) ?: createFile(day, fileName)) {
+            readText(StandardCharsets.UTF_8)
         }
     }
 
@@ -53,12 +54,9 @@ class DataImporter {
         val input = runBlocking {
             val url = "https://adventofcode.com/2024/day/${day.value}/input"
 
-            val resp = httpClient.get(url)
-            {
+            val resp = httpClient.get(url) {
                 headers {
-                    append(
-                        HttpHeaders.Cookie, "<YourSessionTokenHere>"
-                    )
+                    append(HttpHeaders.Cookie, sessionToken)
                 }
             }
             resp.bodyAsText()

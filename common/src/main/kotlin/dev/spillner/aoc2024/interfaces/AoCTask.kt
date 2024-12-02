@@ -10,9 +10,9 @@ import dev.spillner.aoc2024.web.DataImporter
 interface AoCTask : Runnable {
     val day: Day
 
-    fun partOne(data: String)
+    fun partOne(input: String)
 
-    fun partTwo(data: String)
+    fun partTwo(input: String)
 
     fun getInput() = DataImporter().getInput(day)
 
@@ -20,6 +20,4 @@ interface AoCTask : Runnable {
         partOne(getInput())
         partTwo(getInput())
     }
-
-
 }

@@ -1,7 +1,3 @@
-plugins {
-    kotlin("jvm")
-}
-
 group = "dev.spillner"
 version = "1.0-SNAPSHOT"
 

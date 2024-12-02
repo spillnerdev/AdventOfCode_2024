@@ -8,15 +8,15 @@ import kotlin.math.abs
 class Day1 : AoCTask {
     override val day: Day = Day.ONE
 
-    override fun partOne(data: String) {
-        val (listA, listB) = getLists(data)
+    override fun partOne(input: String) {
+        val (listA, listB) = getLists(input)
         listA.sort()
         listB.sort()
         listA.zip(listB).sumOf { p -> abs(p.first - p.second) }.let { println("Result part one: $it") }
     }
 
-    override fun partTwo(data: String) {
-        val (listA, listB) = getLists(data)
+    override fun partTwo(input: String) {
+        val (listA, listB) = getLists(input)
         val eachCount = listB.groupingBy { it }.eachCount()
         listA.sumOf { it * eachCount.getOrDefault(it, 0) }.let { println("Result part two: $it") }
     }
