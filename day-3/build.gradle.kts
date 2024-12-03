@@ -6,7 +6,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common"))
 }
 
 tasks.test {

@@ -6,8 +6,7 @@ repositories {
 }
 
 dependencies {
-
-    testImplementation(kotlin("test"))
+    implementation(rootProject.libs.bundles.ktor)
 }
 
 tasks.test {

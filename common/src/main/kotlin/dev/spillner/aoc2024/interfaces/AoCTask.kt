@@ -14,7 +14,7 @@ interface AoCTask : Runnable {
 
     fun partTwo(input: String)
 
-    fun getInput() = DataImporter().getInput(day)
+    fun getInput() = DataImporter.getInput(day)
 
     override fun run() {
         partOne(getInput())
