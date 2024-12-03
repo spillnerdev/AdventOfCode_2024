@@ -43,7 +43,7 @@ fun isDescending(report: List<Int>): Boolean {
 fun isDifferenceWithinRange(report: List<Int>, range: IntRange): Boolean {
     return report.zipWithNext()
         .map { (a, b) -> abs(a - b) }
-        .all { it >= range.first && it <= range.last }
+        .all { it in range }
 }
 
 fun <T> alter(report: List<T>): Pair<List<T>, List<List<T>>> {

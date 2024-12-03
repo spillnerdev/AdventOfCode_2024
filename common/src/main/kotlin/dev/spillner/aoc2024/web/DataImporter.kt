@@ -14,23 +14,22 @@ import java.nio.charset.StandardCharsets
  *
  * @author Lukas Spillner
  */
-class DataImporter {
+object DataImporter {
 
-    private val fileTemplate = "input-day-%d.txt"
-    private val inputCache = ".\\input"
-    private val sessionToken = "<YourSessionTokenHere>"
-
+    private const val FILE_TEMPLATE = "input-day-%d.txt"
+    private const val INPUT_CACHE = ".\\input"
+    private const val SESSION_TOKEN = "<YourSessionTokenHere>"
+    private const val USER_AGENT = "github.com/spillnerdev/AdventOfCode_2024"
 
     fun getInput(day: Day): String {
-        val fileName = fileTemplate.format(day.value)
+        val fileName = FILE_TEMPLATE.format(day.value)
         return with(lookUpCache(fileName) ?: createFile(day, fileName)) {
             readText(StandardCharsets.UTF_8)
         }
     }
 
-
     private fun lookUpCache(fileName: String): File? {
-        val cache = File(inputCache)
+        val cache = File(INPUT_CACHE)
         if (!cache.isDirectory) throw IllegalArgumentException("Cache directory is not a directory")
         val targets = cache.listFiles { file -> file.name.equals(fileName, true) }
 
@@ -40,7 +39,7 @@ class DataImporter {
     }
 
     private fun createFile(day: Day, fileName: String): File {
-        val file = File(inputCache, fileName)
+        val file = File(INPUT_CACHE, fileName)
         file.createNewFile().let { if (!it) throw IllegalStateException("Cannot create file: $file") }
 
         val input = requestInput(day)
@@ -56,7 +55,8 @@ class DataImporter {
 
             val resp = httpClient.get(url) {
                 headers {
-                    append(HttpHeaders.Cookie, sessionToken)
+                    append(HttpHeaders.UserAgent, USER_AGENT)
+                    append(HttpHeaders.Cookie, SESSION_TOKEN)
                 }
             }
             resp.bodyAsText()
@@ -64,5 +64,4 @@ class DataImporter {
         httpClient.close()
         return input
     }
-
 }

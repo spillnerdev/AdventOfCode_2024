@@ -10,11 +10,24 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    dependencies {
+        if (project.name != "common") {
+            implementation(project(":common"))
+        }
+    }
+}
+
 
 allprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     dependencies {
-        implementation(rootProject.libs.bundles.ktor)
+        testImplementation(kotlin("test"))
     }
 }
 
